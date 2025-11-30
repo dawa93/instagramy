@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import './globals.css';
+import Navbar from '@/src/components/Navbar';
 
 const openSans = Open_Sans({
   variable: '--font-geist-sans',
@@ -18,9 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <header></header>
-      <body className={`${openSans.variable} antialiased`}>{children}</body>
+    <html lang="en" className={`${openSans.variable} antialiased`}>
+      <Navbar />
+      <body className="w-full max-w-screen-xl overflow-auto mx-auto">
+        {children}
+      </body>
     </html>
   );
 }
