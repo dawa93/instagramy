@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 import {
   HomeIcon,
@@ -13,6 +13,8 @@ import {
 } from './ui/icons';
 import ColorButton from './ui/ColorButton';
 import Link from 'next/link';
+import SignInButton from './SignInButton';
+import Avatar from './Avatar';
 
 const menuList = [
   {
@@ -34,29 +36,43 @@ const menuList = [
 
 function Navbar() {
   const pathname = usePathname();
+  const { data: session } = useSession();
+
+  const user = session?.user;
 
   return (
-    <header className="sticky top-0 bg-white z-10 border-b">
+    <nav className="sticky top-0 bg-white z-10 border-b">
       <div className="flex justify-between items-center px-6">
         <Link href="/">
           <h1 className="text-3xl font-bold">Instagramy</h1>
         </Link>
-        <nav>
+        <div>
           <ul className="flex gap-4 items-center p-4">
             {menuList.map(menu => {
               return (
-                <li>
-                  <Link href={menu.href} key={menu.href}>
+                <li key={menu.href}>
+                  <Link href={menu.href}>
                     {pathname === menu.href ? menu.clickedIcon : menu.icon}
                   </Link>
                 </li>
               );
             })}
-            <ColorButton text="sign in" onClick={() => {}} />
+
+            {user && (
+              <li>
+                <Link href={`/user/${user.username}`}>
+                  <Avatar thumbnail={user.image} />
+                </Link>
+              </li>
+            )}
+
+            <li>
+              <SignInButton session={session ?? null} />
+            </li>
           </ul>
-        </nav>
+        </div>
       </div>
-    </header>
+    </nav>
   );
 }
 
