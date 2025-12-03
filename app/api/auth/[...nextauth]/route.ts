@@ -19,24 +19,6 @@ const authOptions: NextAuthOptions = {
     // newUser: '/auth/new-user', // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   callbacks: {
-    async signIn({ user: { id, name, image, email } }) {
-      console.log('user', user);
-
-      if (!email) {
-        return false;
-      }
-
-      addUser({
-        id,
-        name: name ?? '',
-        image,
-        email: email,
-        username: email?.split('@')[0] || '',
-      });
-
-      return true;
-    },
-
     async session({ session, token }: { session: Session; token: JWT }) {
       const user = session?.user;
 
