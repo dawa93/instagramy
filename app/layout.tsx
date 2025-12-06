@@ -28,7 +28,9 @@ export default function RootLayout({
         <SWRConfigContext>
           <html lang="en" className={`${openSans.variable} antialiased`}>
             <body className="w-full max-w-screen-xl overflow-auto mx-auto">
-              {children}
+              <main className="w-full flex justify-center bg-amber-50 min-h-full">
+                {children}
+              </main>
             </body>
           </html>
         </SWRConfigContext>
