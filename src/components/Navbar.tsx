@@ -61,7 +61,7 @@ function Navbar() {
             {user && (
               <li>
                 <Link href={`/user/${user.username}`}>
-                  <Avatar thumbnail={user.image} />
+                  <Avatar thumbnail={user.image} size="small" highlight />
                 </Link>
               </li>
             )}
