@@ -3,6 +3,7 @@ import { Open_Sans } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/src/components/Navbar';
 import AuthContext from '@/src/context/AuthContext';
+import SWRConfigContext from '@/src/context/SWRContext';
 
 const openSans = Open_Sans({
   variable: '--font-geist-sans',
@@ -24,11 +25,13 @@ export default function RootLayout({
       <AuthContext>
         <Navbar />
 
-        <html lang="en" className={`${openSans.variable} antialiased`}>
-          <body className="w-full max-w-screen-xl overflow-auto mx-auto">
-            {children}
-          </body>
-        </html>
+        <SWRConfigContext>
+          <html lang="en" className={`${openSans.variable} antialiased`}>
+            <body className="w-full max-w-screen-xl overflow-auto mx-auto">
+              {children}
+            </body>
+          </html>
+        </SWRConfigContext>
       </AuthContext>
     </>
   );
