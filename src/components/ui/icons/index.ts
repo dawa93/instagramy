@@ -4,3 +4,6 @@ export * from './NewFillIcon';
 export * from './NewIcon';
 export * from './SearchFillIcon';
 export * from './SearchIcon';
+export * from './BookmarkIcon';
+export * from './SmileIcon';
+export * from './HeartIcon';

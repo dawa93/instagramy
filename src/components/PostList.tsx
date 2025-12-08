@@ -2,8 +2,9 @@
 
 import useSWR from 'swr';
 import { SimplePost } from '../model/post';
-import { GridLoader } from 'react-spinners';
+
 import PostCard from './PostCard';
+import GridSpinner from './ui/GridSpinner';
 
 function PostList() {
   const {
@@ -18,7 +19,7 @@ function PostList() {
     <section>
       {isLoading && (
         <div className="text-center mt-32">
-          <GridLoader color="red" />
+          <GridSpinner />
         </div>
       )}
 
@@ -27,7 +28,7 @@ function PostList() {
           {postList.map((post, idx) => {
             return (
               <li key={`${post.id}-${idx}`} className="mb-4">
-                <PostCard post={post} />
+                <PostCard post={post} priority={idx < 2 ? true : false} />
               </li>
             );
           })}
