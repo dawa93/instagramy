@@ -31,6 +31,7 @@ export default function RootLayout({
               <main className="w-full flex justify-center bg-amber-50 min-h-full">
                 {children}
               </main>
+              <div id="portal" />
             </body>
           </html>
         </SWRConfigContext>
