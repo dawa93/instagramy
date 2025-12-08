@@ -7,3 +7,4 @@ export * from './SearchIcon';
 export * from './BookmarkIcon';
 export * from './SmileIcon';
 export * from './HeartIcon';
+export * from './CloseIcon';
