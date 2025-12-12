@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import { ProfileUSer } from '../model/user';
 import GridSpinner from './ui/GridSpinner';
 import UserCard from './UserCard';
+import useDebounce from '../hooks/useDebounce';
 
 interface Props extends PropsWithChildren {
   // : ;
@@ -12,11 +13,12 @@ interface Props extends PropsWithChildren {
 
 function UserSearch({}: Props) {
   const [keyword, setKeyword] = useState('');
+  const debouncedKeyword = useDebounce(keyword);
   const {
     data: users,
     isLoading,
     error,
-  } = useSWR<ProfileUSer[]>(`/api/search/${keyword}`);
+  } = useSWR<ProfileUSer[]>(`/api/search/${debouncedKeyword}`);
 
   console.log('users data@!#!@#!@#!@#', users);
 
