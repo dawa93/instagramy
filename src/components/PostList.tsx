@@ -11,7 +11,7 @@ function PostList() {
     data: postList,
     isLoading,
     error,
-  } = useSWR<SimplePost[]>('/api/post');
+  } = useSWR<SimplePost[]>('/api/posts');
 
   console.log('postList', postList);
 

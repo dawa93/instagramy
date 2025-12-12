@@ -9,6 +9,8 @@ import ActionBar from './ActionBar';
 import { useState } from 'react';
 import ModalPortal from './ui/ModalPortal';
 import PostModal from './PostModal';
+import PostDetail from './PostDetail';
+import PostUserAvatar from './PostUserAvatar';
 
 interface Props {
   post: SimplePost;
@@ -21,10 +23,7 @@ function PostCard({ post, priority }: Props) {
 
   return (
     <article className="rounded-lg shadow-md border border-gray-200">
-      <div className="flex items-center p-2">
-        <Avatar thumbnail={userImage} size="medium" highlight />
-        <span className="text-gray-900 font-bold ml-2">{username}</span>
-      </div>
+      <PostUserAvatar userImage={userImage || ''} username={username} />
 
       <Image
         className="w-full object-cover aspect-square"
@@ -51,7 +50,7 @@ function PostCard({ post, priority }: Props) {
               setOpenModal(false);
             }}
           >
-            yaayyyyyy
+            <PostDetail post={post} />
           </PostModal>
         </ModalPortal>
       )}

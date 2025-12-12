@@ -42,34 +42,36 @@ function Navbar() {
 
   return (
     <nav className="sticky top-0 bg-white z-10 border-b">
-      <div className="flex justify-between items-center px-6">
-        <Link href="/">
-          <h1 className="text-3xl font-bold">Instagramy</h1>
-        </Link>
-        <div>
-          <ul className="flex gap-4 items-center p-4">
-            {menuList.map(menu => {
-              return (
-                <li key={menu.href}>
-                  <Link href={menu.href}>
-                    {pathname === menu.href ? menu.clickedIcon : menu.icon}
+      <div className="max-w-screen-xl mx-auto">
+        <div className="flex justify-between items-center px-6">
+          <Link href="/">
+            <h1 className="text-3xl font-bold">Instagramy</h1>
+          </Link>
+          <div>
+            <ul className="flex gap-4 items-center p-4">
+              {menuList.map(menu => {
+                return (
+                  <li key={menu.href}>
+                    <Link href={menu.href}>
+                      {pathname === menu.href ? menu.clickedIcon : menu.icon}
+                    </Link>
+                  </li>
+                );
+              })}
+
+              {user && (
+                <li>
+                  <Link href={`/user/${user.username}`}>
+                    <Avatar thumbnail={user.image} size="small" highlight />
                   </Link>
                 </li>
-              );
-            })}
+              )}
 
-            {user && (
               <li>
-                <Link href={`/user/${user.username}`}>
-                  <Avatar thumbnail={user.image} size="small" highlight />
-                </Link>
+                <SignInButton session={session ?? null} />
               </li>
-            )}
-
-            <li>
-              <SignInButton session={session ?? null} />
-            </li>
-          </ul>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
