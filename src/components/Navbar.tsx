@@ -42,7 +42,7 @@ function Navbar() {
 
   return (
     <nav className="sticky top-0 bg-white z-10 border-b">
-      <div className="max-w-screen-xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center px-6">
           <Link href="/">
             <h1 className="text-3xl font-bold">Instagramy</h1>
