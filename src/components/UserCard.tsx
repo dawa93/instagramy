@@ -1,10 +1,10 @@
 import { PropsWithChildren } from 'react';
-import { ProfileUSer } from '../model/user';
+import { SearchUser } from '../model/user';
 import Link from 'next/link';
 import Avatar from './Avatar';
 
 interface Props extends PropsWithChildren {
-  user: ProfileUSer;
+  user: SearchUser;
 }
 
 function UserCard({
