@@ -2,7 +2,7 @@
 
 import { FormEvent, PropsWithChildren, useState } from 'react';
 import useSWR from 'swr';
-import { ProfileUSer } from '../model/user';
+import { SearchUser } from '../model/user';
 import GridSpinner from './ui/GridSpinner';
 import UserCard from './UserCard';
 import useDebounce from '../hooks/useDebounce';
@@ -18,7 +18,7 @@ function UserSearch({}: Props) {
     data: users,
     isLoading,
     error,
-  } = useSWR<ProfileUSer[]>(`/api/search/${debouncedKeyword}`);
+  } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
 
   console.log('users data@!#!@#!@#!@#', users);
 

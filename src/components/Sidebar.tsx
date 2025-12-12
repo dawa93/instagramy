@@ -1,9 +1,9 @@
 import React from 'react';
-import { User } from '../model/user';
+import { AuthUser } from '../model/user';
 import Avatar from './Avatar';
 
 interface Props {
-  user: User;
+  user: AuthUser;
 }
 
 function Sidebar({ user: { name, username, image } }: Props) {
