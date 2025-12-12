@@ -1,3 +1,4 @@
+import { ProfileUSer } from '../model/user';
 import { client } from './sanity';
 
 interface OAuthUser {
@@ -39,11 +40,19 @@ export async function searchUsers(keyword?: string) {
     ? `&& (name match "${keyword}") || (username match "${keyword}")`
     : ``;
 
-  return client.fetch(
-    `*[_type == "user" ${query}]{
+  return client
+    .fetch(
+      `*[_type == "user" ${query}]{
         ...,
         "following": count(following),
         "followers": count(followers),
       }`,
-  );
+    )
+    .then(users =>
+      users.map((user: ProfileUSer) => ({
+        ...user,
+        following: user.following ?? 0,
+        followers: user.followers ?? 0,
+      })),
+    );
 }
