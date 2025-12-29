@@ -18,21 +18,20 @@ const tabList = [
 ];
 
 function UserPost({ user: { username } }: Props) {
-  // `/api/users/${username}/posts`
-  // `/api/users/${username}/liked`
-  // `/api/users/${username}/bookmarks`
   const [query, setQuery] = useState(tabList[0].type);
 
   return (
     <section>
-      <ul>
+      <ul className="flex justify-center">
         {tabList.map(({ type, icon }) => {
           return (
-            <li key={type} onClick={() => setQuery(type)}>
-              <div>
-                <button>{type}</button>
-                <span>{icon}</span>
-              </div>
+            <li
+              className={`flex items-center gap-2 mx-12 p-4 cursor-pointer border-black ${type === query && 'font-bold border-t'}`}
+              key={type}
+              onClick={() => setQuery(type)}
+            >
+              <button className="scale-150 md:scale-100">{icon}</button>
+              <span className="uppercase hidden md:inline">{type}</span>
             </li>
           );
         })}

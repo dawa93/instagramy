@@ -17,10 +17,10 @@ async function Page({ params }: Props) {
   }
 
   return (
-    <>
+    <section className="w-full">
       <UserProfile user={user} />
       <UserPost user={user} />
-    </>
+    </section>
   );
 }
 
