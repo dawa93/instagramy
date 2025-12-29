@@ -19,9 +19,9 @@ function PostGrid({ username, query }: Props) {
   console.log('postList', postList);
 
   return (
-    <div>
+    <div className="w-full text-center">
       {isLoading && <GridSpinner />}
-      <ul>
+      <ul className="grid grid-cols-3 gap-4 py-4 px-8">
         {postList &&
           postList.map((post, idx) => (
             <li key={post.id}>
