@@ -53,7 +53,7 @@ function PostDetail({ post }: Props) {
               ),
             )}
         </ul>
-        <ActionBar likes={likes} username={username} createdAt={createdAt} />
+        <ActionBar post={post} />
         <CommentFrom />
       </div>
     </section>
