@@ -13,6 +13,7 @@ import { SimplePost } from '../model/post';
 import { useSession } from 'next-auth/react';
 import { useSWRConfig } from 'swr';
 import usePosts from '../hooks/posts';
+import useMe from '../hooks/me';
 
 interface Props {
   post: SimplePost;
@@ -20,13 +21,12 @@ interface Props {
 
 function ActionBar({ post }: Props) {
   const { id, likes, username, createdAt, text } = post;
-  const { data: session } = useSession();
-  const user = session?.user;
-
-  const liked = user ? likes.includes(user.username) : false;
-  const [bookmarked, setBookmarked] = useState(false);
 
   const { setLike } = usePosts();
+  const { user, setBookMark } = useMe();
+
+  const liked = user ? likes.includes(user.username) : false;
+  const bookmarked = user?.bookmarks.includes(id) ?? false;
 
   const handleLike = (like: boolean) => {
     if (user) {
@@ -34,9 +34,11 @@ function ActionBar({ post }: Props) {
     }
   };
 
-  useEffect(() => {
-    setBookmarked(user ? likes.includes(user.username) : false);
-  }, [session]);
+  const handleBookmark = (bookmark: boolean) => {
+    if (user) {
+      setBookMark(id, bookmark);
+    }
+  };
 
   return (
     <>
@@ -50,7 +52,7 @@ function ActionBar({ post }: Props) {
 
         <ToggleButton
           toggled={bookmarked}
-          onToggle={setBookmarked}
+          onToggle={handleBookmark}
           onIcon={<BookmarkFilledIcon />}
           offIcon={<BookmarkIcon />}
         />
