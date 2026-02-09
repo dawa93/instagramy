@@ -35,12 +35,7 @@ function PostCard({ post, priority }: Props) {
         onClick={() => setOpenModal(true)}
       />
 
-      <ActionBar
-        likes={likes}
-        username={username}
-        createdAt={createdAt}
-        text={text}
-      />
+      <ActionBar post={post} />
       <CommentFrom />
 
       {openModal && (

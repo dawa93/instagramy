@@ -45,11 +45,18 @@ const authOptions: NextAuthOptions = {
           user: {
             ...user,
             username: user.email?.split('@')[0] || '',
-            // id: user._id,
+            id: token.id,
           },
         };
       }
       return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+
+      return token;
     },
   },
 };
