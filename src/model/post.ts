@@ -4,7 +4,7 @@ export interface Comment {
   username: string;
 }
 
-export type SimplePost = Omit<FullPost, 'comments'> & { comment: number };
+export type SimplePost = Omit<FullPost, 'comments'> & { comments: number };
 
 export interface FullPost {
   id: string;

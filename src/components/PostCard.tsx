@@ -18,7 +18,8 @@ interface Props {
 }
 
 function PostCard({ post, priority }: Props) {
-  const { userImage, username, image, createdAt, likes, text } = post;
+  const { userImage, username, image, createdAt, likes, text, comments } = post;
+  console.log('post', post);
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -35,7 +36,20 @@ function PostCard({ post, priority }: Props) {
         onClick={() => setOpenModal(true)}
       />
 
-      <ActionBar post={post} />
+      <ActionBar post={post}>
+        {text && (
+          <p className="">
+            <span className="font-bold mr-1">{username}</span>
+            {text}
+          </p>
+        )}
+        {comments > 1 && (
+          <button
+            className="font-bold my-2 text-sky-500"
+            onClick={() => setOpenModal(true)}
+          >{`view all ${comments} comments`}</button>
+        )}
+      </ActionBar>
       <CommentFrom />
 
       {openModal && (

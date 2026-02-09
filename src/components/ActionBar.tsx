@@ -7,7 +7,7 @@ import {
   HeartIcon,
 } from './ui/icons';
 import { parseDate } from '../utils/date';
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import ToggleButton from './ui/ToggleButton';
 import { SimplePost } from '../model/post';
 import { useSession } from 'next-auth/react';
@@ -15,12 +15,12 @@ import { useSWRConfig } from 'swr';
 import usePosts from '../hooks/posts';
 import useMe from '../hooks/me';
 
-interface Props {
+interface Props extends PropsWithChildren {
   post: SimplePost;
 }
 
-function ActionBar({ post }: Props) {
-  const { id, likes, username, createdAt, text } = post;
+function ActionBar({ children, post }: Props) {
+  const { id, likes, createdAt } = post;
 
   const { setLike } = usePosts();
   const { user, setBookMark } = useMe();
@@ -60,12 +60,8 @@ function ActionBar({ post }: Props) {
 
       <div className="px-4 py-1">
         <p className="text-small font-bold mb-2">{`${likes?.length ?? 0} ${likes?.length > 1 ? 'likes' : 'like'}`}</p>
-        {text && (
-          <p className="">
-            <span className="font-bold mr-1">{username}</span>
-            {text}
-          </p>
-        )}
+        {children}
+
         <p className="text-xs text-neutral-500 uppercase my-2">
           {parseDate(createdAt)}
         </p>
