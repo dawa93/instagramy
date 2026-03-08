@@ -1,5 +1,6 @@
 import useSWR from 'swr';
 import { HomeUser } from '../model/user';
+import { useCallback } from 'react';
 
 const updateBookmark = async (postId: string, bookmark: boolean) => {
   return fetch('/api/bookmarks', {
@@ -11,27 +12,30 @@ const updateBookmark = async (postId: string, bookmark: boolean) => {
 export default function useMe() {
   const { data: user, isLoading, error, mutate } = useSWR<HomeUser>('/api/me');
 
-  const setBookMark = (postId: string, bookmark: boolean) => {
-    if (!user) {
-      return;
-    }
+  const setBookMark = useCallback(
+    (postId: string, bookmark: boolean) => {
+      if (!user) {
+        return;
+      }
 
-    const bookmarks = user?.bookmarks;
+      const bookmarks = user?.bookmarks;
 
-    const newUser = {
-      ...user,
-      bookmarks: bookmark
-        ? [...bookmarks, postId]
-        : bookmarks.filter(bookmark => bookmark !== postId),
-    };
+      const newUser = {
+        ...user,
+        bookmarks: bookmark
+          ? [...bookmarks, postId]
+          : bookmarks.filter(bookmark => bookmark !== postId),
+      };
 
-    return mutate(updateBookmark(postId, bookmark), {
-      optimisticData: newUser,
-      populateCache: false,
-      revalidate: false,
-      rollbackOnError: true,
-    });
-  };
+      return mutate(updateBookmark(postId, bookmark), {
+        optimisticData: newUser,
+        populateCache: false,
+        revalidate: false,
+        rollbackOnError: true,
+      });
+    },
+    [user, mutate],
+  );
 
   return { user, isLoading, error, setBookMark };
 }
