@@ -110,7 +110,7 @@ export async function addComment(
   return client
     .patch(postId)
     .setIfMissing({ comments: [] })
-    .append('comment', [
+    .append('comments', [
       {
         comment,
         author: {

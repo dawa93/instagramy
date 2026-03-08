@@ -1,6 +1,6 @@
 export interface Comment {
   comment: string;
-  image: string;
+  image?: string | undefined;
   username: string;
 }
 

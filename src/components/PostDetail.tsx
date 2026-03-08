@@ -1,11 +1,12 @@
 import { PropsWithChildren } from 'react';
-import { FullPost, SimplePost } from '../model/post';
-import useSWR from 'swr';
+import { Comment, SimplePost } from '../model/post';
+
 import Image from 'next/image';
 import PostUserAvatar from './PostUserAvatar';
 import ActionBar from './ActionBar';
-import CommentFrom from './CommentFrom';
+
 import Avatar from './Avatar';
+import useFullPost from '../hooks/post';
 
 interface Props extends PropsWithChildren {
   post: SimplePost;
@@ -13,11 +14,17 @@ interface Props extends PropsWithChildren {
 
 function PostDetail({ post }: Props) {
   const { id, userImage, username, image, createdAt, likes } = post;
-  const { data } = useSWR<FullPost>(`/api/posts/${id}`);
+
+  const { post: data, postComment } = useFullPost(id);
+
   const comments = data?.comments;
 
   console.log(comments);
   console.log('post detail data', data);
+
+  const handlePostComment = (comment: Comment) => {
+    postComment(comment);
+  };
 
   return (
     <section className="flex w-full h-full">
@@ -53,8 +60,8 @@ function PostDetail({ post }: Props) {
               ),
             )}
         </ul>
-        <ActionBar post={post} />
-        <CommentFrom />
+        <ActionBar post={post} onComment={postComment} />
+        {/* <CommentFrom onPostComment={handlePostComment} /> */}
       </div>
     </section>
   );

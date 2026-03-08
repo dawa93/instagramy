@@ -1,6 +1,6 @@
 'use client';
 
-import { SimplePost } from '../model/post';
+import { Comment, SimplePost } from '../model/post';
 import Avatar from './Avatar';
 import Image from 'next/image';
 
@@ -11,6 +11,7 @@ import ModalPortal from './ui/ModalPortal';
 import PostModal from './PostModal';
 import PostDetail from './PostDetail';
 import PostUserAvatar from './PostUserAvatar';
+import usePosts from '../hooks/posts';
 
 interface Props {
   post: SimplePost;
@@ -19,8 +20,14 @@ interface Props {
 
 function PostCard({ post, priority }: Props) {
   const { userImage, username, image, createdAt, likes, text, comments } = post;
-  console.log('post', post);
+
   const [openModal, setOpenModal] = useState(false);
+
+  const { postComment } = usePosts();
+
+  const handlePostComment = (comment: Comment) => {
+    postComment(post, comment);
+  };
 
   return (
     <article className="rounded-lg shadow-md border border-gray-200">
@@ -36,7 +43,7 @@ function PostCard({ post, priority }: Props) {
         onClick={() => setOpenModal(true)}
       />
 
-      <ActionBar post={post}>
+      <ActionBar post={post} onComment={handlePostComment}>
         {text && (
           <p className="">
             <span className="font-bold mr-1">{username}</span>
@@ -50,7 +57,6 @@ function PostCard({ post, priority }: Props) {
           >{`view all ${comments} comments`}</button>
         )}
       </ActionBar>
-      <CommentFrom />
 
       {openModal && (
         <ModalPortal>

@@ -7,19 +7,19 @@ import {
   HeartIcon,
 } from './ui/icons';
 import { parseDate } from '../utils/date';
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { PropsWithChildren } from 'react';
 import ToggleButton from './ui/ToggleButton';
-import { SimplePost } from '../model/post';
-import { useSession } from 'next-auth/react';
-import { useSWRConfig } from 'swr';
+import { Comment, SimplePost } from '../model/post';
 import usePosts from '../hooks/posts';
 import useMe from '../hooks/me';
+import CommentFrom from './CommentFrom';
 
 interface Props extends PropsWithChildren {
   post: SimplePost;
+  onComment: (comment: Comment) => void;
 }
 
-function ActionBar({ children, post }: Props) {
+function ActionBar({ children, post, onComment }: Props) {
   const { id, likes, createdAt } = post;
 
   const { setLike } = usePosts();
@@ -38,6 +38,10 @@ function ActionBar({ children, post }: Props) {
     if (user) {
       setBookMark(id, bookmark);
     }
+  };
+
+  const handleComment = (comment: string) => {
+    user && onComment({ comment, username: user.username, image: user.image });
   };
 
   return (
@@ -66,6 +70,8 @@ function ActionBar({ children, post }: Props) {
           {parseDate(createdAt)}
         </p>
       </div>
+
+      <CommentFrom onPostComment={handleComment} />
     </>
   );
 }
