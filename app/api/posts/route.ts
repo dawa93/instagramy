@@ -1,6 +1,8 @@
-import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+
 import { authOptions } from '../auth/[...nextauth]/route';
+
 import { getFollowingPostsOf } from '@/src/service/posts';
 
 export async function GET() {

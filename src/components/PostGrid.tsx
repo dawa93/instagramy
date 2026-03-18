@@ -1,8 +1,10 @@
 import { PropsWithChildren } from 'react';
 import useSWR from 'swr';
-import GridSpinner from './ui/GridSpinner';
+
 import { SimplePost } from '../model/post';
+
 import PostGridCard from './PostGridCard';
+import GridSpinner from './ui/GridSpinner';
 
 interface Props extends PropsWithChildren {
   username: string;

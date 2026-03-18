@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+
 import { CloseIcon } from './ui/icons';
 interface Props extends PropsWithChildren {
   onClose: () => void;

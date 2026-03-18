@@ -1,5 +1,6 @@
-import UserSearch from '@/src/components/UserSearch';
 import { Metadata } from 'next';
+
+import UserSearch from '@/src/components/UserSearch';
 
 export const dynamic = 'force-dynamic'; // 강제로 동적 요청으로 변경
 

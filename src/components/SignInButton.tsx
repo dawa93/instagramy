@@ -1,7 +1,8 @@
 'use client';
 
-import { signIn, signOut } from 'next-auth/react';
 import { Session } from 'next-auth';
+import { signIn, signOut } from 'next-auth/react';
+
 import ColorButton from './ui/ColorButton';
 
 function SignInButton({ session }: { session: Session | null }) {

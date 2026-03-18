@@ -1,6 +1,8 @@
-import { PropsWithChildren } from 'react';
-import { SearchUser } from '../model/user';
 import Link from 'next/link';
+import { PropsWithChildren } from 'react';
+
+import { SearchUser } from '../model/user';
+
 import Avatar from './Avatar';
 
 interface Props extends PropsWithChildren {

@@ -1,4 +1,3 @@
-import { SignInResponse } from 'next-auth/react';
 
 type Props = {
   text: string;

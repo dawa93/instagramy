@@ -1,17 +1,15 @@
 'use client';
 
-import { FormEvent, PropsWithChildren, useState } from 'react';
+import { SubmitEvent, useState } from 'react';
 import useSWR from 'swr';
+
+import useDebounce from '../hooks/useDebounce';
 import { SearchUser } from '../model/user';
+
 import GridSpinner from './ui/GridSpinner';
 import UserCard from './UserCard';
-import useDebounce from '../hooks/useDebounce';
 
-interface Props extends PropsWithChildren {
-  // : ;
-}
-
-function UserSearch({}: Props) {
+function UserSearch() {
   const [keyword, setKeyword] = useState('');
   const debouncedKeyword = useDebounce(keyword);
   const {
@@ -22,8 +20,8 @@ function UserSearch({}: Props) {
 
   console.log('users data@!#!@#!@#!@#', users);
 
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault;
+  const onSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
   };
 
   return (
@@ -35,7 +33,7 @@ function UserSearch({}: Props) {
           autoFocus
           placeholder="Search for a username or user"
           value={keyword}
-          onChange={e => setKeyword(e.target.value)}
+          onChange={(e) => setKeyword(e.target.value)}
         />
       </form>
 
@@ -45,7 +43,7 @@ function UserSearch({}: Props) {
 
       <ul className="w-full p-4">
         {users &&
-          users.map(user => (
+          users.map((user) => (
             <li key={user.username}>
               <UserCard user={user} />
             </li>

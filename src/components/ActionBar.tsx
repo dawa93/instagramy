@@ -1,18 +1,20 @@
 'use client';
 
+import { PropsWithChildren } from 'react';
+
+import useMe from '../hooks/me';
+import usePosts from '../hooks/posts';
+import { Comment, SimplePost } from '../model/post';
+import { parseDate } from '../utils/date';
+
+import CommentFrom from './CommentFrom';
 import {
   BookmarkFilledIcon,
   BookmarkIcon,
   HeartFilled,
   HeartIcon,
 } from './ui/icons';
-import { parseDate } from '../utils/date';
-import { PropsWithChildren } from 'react';
 import ToggleButton from './ui/ToggleButton';
-import { Comment, SimplePost } from '../model/post';
-import usePosts from '../hooks/posts';
-import useMe from '../hooks/me';
-import CommentFrom from './CommentFrom';
 
 interface Props extends PropsWithChildren {
   post: SimplePost;

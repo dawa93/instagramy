@@ -1,10 +1,13 @@
 'use client';
 
-import { PropagateLoader } from 'react-spinners';
 import Link from 'next/link';
+import { PropagateLoader } from 'react-spinners';
+
+import useMe from '../hooks/me';
+
 import Avatar from './Avatar';
 import ScrollableBar from './ScrollableBar';
-import useMe from '../hooks/me';
+
 
 function FollowingBar() {
   const { user, isLoading, error } = useMe();

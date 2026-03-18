@@ -1,8 +1,9 @@
-import user from '@/sanity-studio/schemaTypes/user';
-import { addUser } from '@/src/service/user';
 import NextAuth, { NextAuthOptions, Session } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import GoogleProvider from 'next-auth/providers/google';
+
+import user from '@/sanity-studio/schemaTypes/user';
+import { addUser } from '@/src/service/user';
 
 const authOptions: NextAuthOptions = {
   providers: [
