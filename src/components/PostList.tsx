@@ -1,8 +1,9 @@
 'use client';
 
+import usePosts from '../hooks/posts';
+
 import PostCard from './PostCard';
 import GridSpinner from './ui/GridSpinner';
-import usePosts from '../hooks/posts';
 
 function PostList() {
   const { posts: postList, isLoading, error } = usePosts();

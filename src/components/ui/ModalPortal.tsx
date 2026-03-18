@@ -1,11 +1,7 @@
 import { PropsWithChildren } from 'react';
 import reactDom from 'react-dom';
 
-interface Props extends PropsWithChildren {
-  // : ;
-}
-
-function ModalPortal({ children }: Props) {
+function ModalPortal({ children }: PropsWithChildren) {
   if (typeof window === 'undefined') {
     return null;
   }

@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { authOptions } from '../auth/[...nextauth]/route';
+
 import { getServerSession } from 'next-auth';
-import { dislikePost, likePost } from '@/src/service/posts';
+
+import { authOptions } from '../auth/[...nextauth]/route';
+
 import { addBookmarkPost, removeBookmarkPost } from '@/src/service/user';
 
 export async function PUT(req: NextRequest) {

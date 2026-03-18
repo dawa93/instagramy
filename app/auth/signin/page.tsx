@@ -1,9 +1,13 @@
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../../api/auth/[...nextauth]/route';
-import { redirect } from 'next/navigation';
-import { getProviders } from 'next-auth/react';
-import SignIn from '@/src/components/sign-in';
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
+import { getServerSession } from 'next-auth/next';
+
+import { getProviders } from 'next-auth/react';
+
+import { authOptions } from '../../api/auth/[...nextauth]/route';
+
+import SignIn from '@/src/components/sign-in';
+
 
 interface Props {
   searchParams: {

@@ -1,6 +1,7 @@
-import useSWR, { useSWRConfig } from 'swr';
-import { FullPost, Comment } from '../model/post';
 import { useCallback } from 'react';
+import useSWR, { useSWRConfig } from 'swr';
+
+import { FullPost, Comment } from '../model/post';
 
 const addComment = async (id: string, comment: string) => {
   return fetch('/api/comments', {

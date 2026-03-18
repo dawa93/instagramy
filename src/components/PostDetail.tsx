@@ -1,12 +1,14 @@
+import Image from 'next/image';
 import { PropsWithChildren } from 'react';
+
+import useFullPost from '../hooks/post';
 import { Comment, SimplePost } from '../model/post';
 
-import Image from 'next/image';
-import PostUserAvatar from './PostUserAvatar';
 import ActionBar from './ActionBar';
 
 import Avatar from './Avatar';
-import useFullPost from '../hooks/post';
+import PostUserAvatar from './PostUserAvatar';
+
 
 interface Props extends PropsWithChildren {
   post: SimplePost;

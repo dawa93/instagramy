@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+
 import Avatar from './Avatar';
 
 interface Props extends PropsWithChildren {

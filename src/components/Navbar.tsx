@@ -1,8 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
+import Avatar from './Avatar';
+import SignInButton from './SignInButton';
 import {
   HomeIcon,
   HomeFillHome,
@@ -11,10 +14,6 @@ import {
   NewIcon,
   NewFillIcon,
 } from './ui/icons';
-import ColorButton from './ui/ColorButton';
-import Link from 'next/link';
-import SignInButton from './SignInButton';
-import Avatar from './Avatar';
 
 const menuList = [
   {

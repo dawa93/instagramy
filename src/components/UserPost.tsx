@@ -1,11 +1,11 @@
 'use client';
 
 import { PropsWithChildren, useState } from 'react';
-import { ProfileUser } from '../model/user';
-import useSWR from 'swr';
 
-import { PostIcon, BookmarkIcon, HeartIcon } from './ui/icons';
+import { ProfileUser } from '../model/user';
+
 import PostGrid from './PostGrid';
+import { PostIcon, BookmarkIcon, HeartIcon } from './ui/icons';
 
 interface Props extends PropsWithChildren {
   user: ProfileUser;

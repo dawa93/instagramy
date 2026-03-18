@@ -1,5 +1,6 @@
-import { searchUsers } from '@/src/service/user';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { searchUsers } from '@/src/service/user';
 
 interface Context {
   params: { keyword: string };

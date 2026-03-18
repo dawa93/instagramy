@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { AuthUser } from '../model/user';
+
 import Avatar from './Avatar';
 
 interface Props {

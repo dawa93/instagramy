@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { getLikedOf, getPostOf, getSavedPostsOf } from '@/src/service/posts';
 
 interface Context {

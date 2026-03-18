@@ -1,12 +1,15 @@
 'use client';
 
-import { PropsWithChildren, useState } from 'react';
-import { SimplePost } from '../model/post';
 import Image from 'next/image';
-import ModalPortal from './ui/ModalPortal';
-import PostModal from './PostModal';
-import PostDetail from './PostDetail';
 import { signIn, useSession } from 'next-auth/react';
+import { PropsWithChildren, useState } from 'react';
+
+import { SimplePost } from '../model/post';
+
+import PostDetail from './PostDetail';
+import PostModal from './PostModal';
+import ModalPortal from './ui/ModalPortal';
+
 
 interface Props extends PropsWithChildren {
   post: SimplePost;
