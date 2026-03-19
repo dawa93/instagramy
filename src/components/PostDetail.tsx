@@ -9,7 +9,6 @@ import ActionBar from './ActionBar';
 import Avatar from './Avatar';
 import PostUserAvatar from './PostUserAvatar';
 
-
 interface Props extends PropsWithChildren {
   post: SimplePost;
 }

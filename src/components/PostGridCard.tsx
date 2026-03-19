@@ -10,7 +10,6 @@ import PostDetail from './PostDetail';
 import PostModal from './PostModal';
 import ModalPortal from './ui/ModalPortal';
 
-
 interface Props extends PropsWithChildren {
   post: SimplePost;
   priority: boolean;

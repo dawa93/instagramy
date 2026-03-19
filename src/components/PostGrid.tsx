@@ -1,24 +1,11 @@
 import { PropsWithChildren } from 'react';
-import useSWR from 'swr';
-
-import { SimplePost } from '../model/post';
 
 import PostGridCard from './PostGridCard';
 import GridSpinner from './ui/GridSpinner';
+import usePosts from '../hooks/posts';
 
-interface Props extends PropsWithChildren {
-  username: string;
-  query: string;
-}
-
-function PostGrid({ username, query }: Props) {
-  const {
-    data: postList,
-    isLoading,
-    error,
-  } = useSWR<SimplePost[]>(`/api/users/${username}/${query}`);
-
-  console.log('postList', postList);
+function PostGrid() {
+  const { posts: postList, isLoading } = usePosts();
 
   return (
     <div className="w-full text-center">
