@@ -20,9 +20,6 @@ function PostDetail({ post }: Props) {
 
   const comments = data?.comments;
 
-  console.log(comments);
-  console.log('post detail data', data);
-
   const handlePostComment = (comment: Comment) => {
     postComment(comment);
   };

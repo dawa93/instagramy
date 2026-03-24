@@ -123,10 +123,6 @@ export async function addComment(
 }
 
 export async function createPost(userId: string, text: string, file: Blob) {
-  console.log('SANITY_PROJECT_ID', process.env.SANITY_PROJECT_ID);
-  console.log('SANITY_DATASET', process.env.SANITY_DATASET);
-  console.log('assetsUrl', assetsUrl);
-
   return fetch(assetsUrl, {
     method: 'POST',
     headers: {

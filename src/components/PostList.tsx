@@ -8,8 +8,6 @@ import GridSpinner from './ui/GridSpinner';
 function PostList() {
   const { posts: postList, isLoading, error } = usePosts();
 
-  console.log('postList', postList);
-
   return (
     <section>
       {isLoading && (
