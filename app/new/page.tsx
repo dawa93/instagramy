@@ -1,8 +1,10 @@
-import NewPost from '@/src/components/NewPost';
 import { Metadata } from 'next';
-import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
+import { getServerSession } from 'next-auth';
+
 import { authOptions } from '../api/auth/[...nextauth]/route';
+
+import NewPost from '@/src/components/NewPost';
 
 export const metadata: Metadata = {
   title: 'New post',

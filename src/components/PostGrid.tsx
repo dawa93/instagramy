@@ -1,8 +1,9 @@
-import { PropsWithChildren } from 'react';
+
+import usePosts from '../hooks/posts';
 
 import PostGridCard from './PostGridCard';
 import GridSpinner from './ui/GridSpinner';
-import usePosts from '../hooks/posts';
+
 
 function PostGrid() {
   const { posts: postList, isLoading } = usePosts();

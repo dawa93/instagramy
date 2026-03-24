@@ -2,11 +2,11 @@
 
 import { PropsWithChildren, useState } from 'react';
 
+import { CacheKeysContext } from '../context/CacheKeysContext';
 import { ProfileUser } from '../model/user';
 
 import PostGrid from './PostGrid';
 import { PostIcon, BookmarkIcon, HeartIcon } from './ui/icons';
-import { CacheKeysContext } from '../context/CacheKeysContext';
 
 interface Props extends PropsWithChildren {
   user: ProfileUser;
