@@ -9,7 +9,5 @@ interface Context {
 export async function GET(_: NextRequest, context: Context) {
   const keyword = (await context.params).keyword;
 
-  console.log('keyword', keyword);
-
-  return searchUsers(keyword).then(data => NextResponse.json(data));
+  return searchUsers(keyword).then((data) => NextResponse.json(data));
 }

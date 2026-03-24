@@ -1,11 +1,16 @@
 'use client';
 
 import Image from 'next/image';
+
+import { useRouter } from 'next/navigation';
+import { ChangeEvent, useRef, useState, type MouseEvent } from 'react';
+
 import { AuthUser } from '../model/user';
+
 import Button from './Button';
 import PostUserAvatar from './PostUserAvatar';
+import GridSpinner from './ui/GridSpinner';
 import FilesIcon from './ui/icons/FilesIcon';
-import { ChangeEvent, DragEventHandler, useState } from 'react';
 
 interface Props {
   user: AuthUser;
@@ -15,6 +20,10 @@ function NewPost({ user }: Props) {
   const { username, image } = user;
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState<File>();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>('');
+  const textRef = useRef<HTMLTextAreaElement>(null);
+  const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -23,7 +32,6 @@ function NewPost({ user }: Props) {
 
     if (files && files[0]) {
       setFile(files[0]);
-      console.log('files[0]', files[0]);
     }
   };
 
@@ -48,12 +56,46 @@ function NewPost({ user }: Props) {
 
     if (files && files[0]) {
       setFile(files[0]);
-      console.log('files[0]', files[0]);
     }
+  };
+
+  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!file) {
+      return;
+    }
+
+    setLoading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('text', textRef.current?.value ?? '');
+
+    fetch('/api/posts', { method: 'POST', body: formData })
+      .then((res) => {
+        if (!res.ok) {
+          setError(`${res.status} ${res.statusText}`);
+          return;
+        }
+
+        router.push('/');
+      })
+      .catch((err) => setError(err.toString()))
+      .finally(() => setLoading(false));
   };
 
   return (
     <section className="w-full max-w-xl flex flex-col items-center mt-6">
+      {loading && (
+        <div className="absolute inset-0 z-20 text-center pt-[30%] bg-sky-500/20">
+          <GridSpinner />
+        </div>
+      )}
+      {error && (
+        <p className="w-full bg-red-100 text-red-600 text-center p-4 mb-4 font-bold">
+          {error}
+        </p>
+      )}
+
       <PostUserAvatar username={username} userImage={image ?? ''} />
 
       <form className="w-full flex flex-col mt-2">
@@ -104,9 +146,10 @@ function NewPost({ user }: Props) {
           required
           rows={10}
           placeholder="Write a caption"
+          ref={textRef}
         />
 
-        <Button text="Publish" onClick={() => {}} />
+        <Button text="Publish" type="submit" onClick={handleSubmit} />
       </form>
     </section>
   );

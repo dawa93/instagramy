@@ -10,7 +10,6 @@ interface Props {
 }
 
 function SignIn({ providers, callbackUrl }: Props) {
-  console.log('callbackUrl in client', callbackUrl);
   return (
     <>
       {Object.values(providers).map(({ name, id }) => (

@@ -18,8 +18,6 @@ function UserSearch() {
     error,
   } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
 
-  console.log('users data@!#!@#!@#!@#', users);
-
   const onSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
   };

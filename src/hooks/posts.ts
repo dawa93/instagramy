@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import useSWR from 'swr';
 
-import { Comment, SimplePost } from '../model/post';
 import { useCacheKeys } from '../context/CacheKeysContext';
+import { Comment, SimplePost } from '../model/post';
 
 const updateLike = async (id: string, like: boolean) => {
   return fetch('/api/likes', {

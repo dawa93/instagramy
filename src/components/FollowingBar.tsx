@@ -8,21 +8,9 @@ import useMe from '../hooks/me';
 import Avatar from './Avatar';
 import ScrollableBar from './ScrollableBar';
 
-
 function FollowingBar() {
   const { user, isLoading, error } = useMe();
   const users = user?.following || [];
-  // const users = user?.following
-  // ? [
-  //     ...user?.following,
-  //     ...user?.following,
-  //     ...user?.following,
-  //     ...user?.following,
-  //     ...user?.following,
-  //     ...user?.following,
-  //   ]
-  // : [];
-  console.log('user', user);
 
   return (
     <section className="w-full felx justify-center items-center p-4 shadow-sm shadow-neutral-300 mb-4 rounded-lg min-h-[90px] overflow-x-auto relative z-0">
