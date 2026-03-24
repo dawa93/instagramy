@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]/route';
 
 import { createPost, getFollowingPostsOf } from '@/src/service/posts';
+import { withSessionUser } from '@/src/utils/session';
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -18,21 +19,16 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  const user = session?.user;
+  return withSessionUser(async (user) => {
+    const form = await req.formData();
+    const text = form.get('text')?.toString() || '';
+    const file = form.get('file') as Blob;
 
-  if (!user) {
-    return new Response('Authentication Error', { status: 401 });
-  }
+    if (!file || !text) {
+      return new Response('bad request', { status: 401 });
+    }
 
-  const form = await req.formData();
-  const text = form.get('text')?.toString() || '';
-  const file = form.get('file') as Blob;
-
-  if (!file || !text) {
-    return new Response('bad request', { status: 401 });
-  }
-
-  return createPost(user.id, text, file) //
-    .then((data) => NextResponse.json(data));
+    return createPost(user.id, text, file) //
+      .then((data) => NextResponse.json(data));
+  });
 }
