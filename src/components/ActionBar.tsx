@@ -54,6 +54,7 @@ function ActionBar({ children, post, onComment }: Props) {
           onToggle={handleLike}
           onIcon={<HeartFilled />}
           offIcon={<HeartIcon />}
+          title={liked ? 'unlike' : 'liked'}
         />
 
         <ToggleButton
@@ -61,6 +62,7 @@ function ActionBar({ children, post, onComment }: Props) {
           onToggle={handleBookmark}
           onIcon={<BookmarkFilledIcon />}
           offIcon={<BookmarkIcon />}
+          title={bookmarked ? 'unbookmark' : 'unbookmark'}
         />
       </div>
 

@@ -27,6 +27,7 @@ function FollowingBar() {
               className="flex flex-col items-center w-20"
               href={`/user/${user.username}`}
               key={`${user.username}-${idx}`}
+              aria-label={`${user.username}`}
             >
               <Avatar thumbnail={user.image} highlight />
               <p className="w-full text-center text-sm text-ellipsis overflow-hidden">
