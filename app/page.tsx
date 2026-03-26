@@ -1,7 +1,31 @@
-export default function Home() {
+import { redirect } from 'next/navigation';
+import { getServerSession } from 'next-auth';
+
+import { authOptions } from './api/auth/[...nextauth]/route';
+
+import FollowingBar from '@/src/components/FollowingBar';
+import PostList from '@/src/components/PostList';
+import Sidebar from '@/src/components/Sidebar';
+
+
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+  const user = session?.user;
+
+  if (!user) {
+    redirect('/auth/signin');
+  }
+
   return (
-    <div className="">
-      <h1 className="text-4xl font-bold">Instagramy</h1>
-    </div>
+    <section className="flex flex-col md:flex-row max-w-[850px] p-4">
+      <div className="w-full basis-3/4 min-w-0">
+        <FollowingBar />
+        <PostList />
+      </div>
+
+      <div className="basis-1/4 ml-8">
+        <Sidebar user={user} />
+      </div>
+    </section>
   );
 }

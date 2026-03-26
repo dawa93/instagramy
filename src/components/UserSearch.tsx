@@ -1,0 +1,54 @@
+'use client';
+
+import { SubmitEvent, useState } from 'react';
+import useSWR from 'swr';
+
+import useDebounce from '../hooks/useDebounce';
+import { SearchUser } from '../model/user';
+
+import GridSpinner from './ui/GridSpinner';
+import UserCard from './UserCard';
+
+function UserSearch() {
+  const [keyword, setKeyword] = useState('');
+  const debouncedKeyword = useDebounce(keyword);
+  const {
+    data: users,
+    isLoading,
+    error,
+  } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
+
+  const onSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
+  return (
+    <section className="w-full max-w-2xl flex flex-col items-center my-4">
+      <form onSubmit={onSubmit} className="w-full mb-4">
+        <input
+          className="w-full text-xl p-3 outline-none border border-gray-400"
+          type="text"
+          autoFocus
+          placeholder="Search for a username or user"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+      </form>
+
+      {error && <p>무언가가 잘못 되었음</p>}
+      {isLoading && <GridSpinner />}
+      {!isLoading && !error && users?.length === 0 && <p>찾는 사용자가 없음</p>}
+
+      <ul className="w-full p-4">
+        {users &&
+          users.map((user) => (
+            <li key={user.username}>
+              <UserCard user={user} />
+            </li>
+          ))}
+      </ul>
+    </section>
+  );
+}
+
+export default UserSearch;
