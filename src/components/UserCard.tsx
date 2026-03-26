@@ -16,6 +16,7 @@ function UserCard({
     <Link
       href={`/user/${username}`}
       className="flex gap-2 items-center w-full rounded-sm border border-neutral-300 mb-2 p-4 bg-white hover:bg-neutral-50"
+      aria-label={`${username} card`}
     >
       <Avatar thumbnail={image} />
       <div className="text-neutral-500">
