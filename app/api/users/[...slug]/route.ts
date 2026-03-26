@@ -8,7 +8,10 @@ interface Context {
   };
 }
 
-export async function GET(_: NextRequest, context: Context) {
+export async function GET(
+  _: NextRequest,
+  context: RouteContext<'/api/users/[...slug]'>,
+) {
   // const keyword = (await context.params).keyword;
   const { slug } = await context.params;
 
@@ -25,5 +28,32 @@ export async function GET(_: NextRequest, context: Context) {
     request = getLikedOf;
   }
 
-  return request(username).then(data => NextResponse.json(data));
+  return request(username).then((data) => NextResponse.json(data));
 }
+
+// OR
+// interface Context {
+//   params: {
+//     slug: string[];
+//   };
+// }
+
+// export async function GET(_: NextRequest, context: Context) {
+//   // const keyword = (await context.params).keyword;
+//   const { slug } = await context.params;
+
+//   if (!slug || !Array.isArray(slug) || slug.length < 2) {
+//     return new NextRequest('Bad Request');
+//   }
+
+//   const [username, query] = slug;
+
+//   let request = getPostOf;
+//   if (query === 'saved') {
+//     request = getSavedPostsOf;
+//   } else if (query === 'liked') {
+//     request = getLikedOf;
+//   }
+
+//   return request(username).then(data => NextResponse.json(data));
+// }
