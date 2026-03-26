@@ -20,16 +20,19 @@ const menuList = [
     icon: <HomeIcon />,
     clickedIcon: <HomeFillHome />,
     href: '/',
+    title: 'home',
   },
   {
     icon: <SearchIcon />,
     clickedIcon: <SearchFillIcon />,
     href: '/search',
+    title: 'search user',
   },
   {
     icon: <NewIcon />,
     clickedIcon: <NewFillIcon />,
     href: '/new',
+    title: 'create new post',
   },
 ];
 
@@ -43,15 +46,15 @@ function Navbar() {
     <nav className="sticky top-0 bg-white z-10 border-b">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center px-6">
-          <Link href="/">
+          <Link href="/" aria-label={'home'}>
             <h1 className="text-3xl font-bold">Instagramy</h1>
           </Link>
           <div>
             <ul className="flex gap-4 items-center p-4">
-              {menuList.map(menu => {
+              {menuList.map((menu) => {
                 return (
                   <li key={menu.href}>
-                    <Link href={menu.href}>
+                    <Link href={menu.href} aria-label={menu.title}>
                       {pathname === menu.href ? menu.clickedIcon : menu.icon}
                     </Link>
                   </li>
@@ -60,7 +63,10 @@ function Navbar() {
 
               {user && (
                 <li>
-                  <Link href={`/user/${user.username}`}>
+                  <Link
+                    href={`/user/${user.username}`}
+                    aria-label={`${user.username}`}
+                  >
                     <Avatar thumbnail={user.image} size="small" highlight />
                   </Link>
                 </li>

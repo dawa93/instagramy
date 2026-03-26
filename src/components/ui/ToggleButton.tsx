@@ -5,11 +5,12 @@ interface Props extends PropsWithChildren {
   onToggle: (toggled: boolean) => void;
   onIcon: React.ReactNode;
   offIcon: React.ReactNode;
+  title: string;
 }
 
-function ToggleButton({ toggled, onToggle, onIcon, offIcon }: Props) {
+function ToggleButton({ toggled, onToggle, onIcon, offIcon, title }: Props) {
   return (
-    <button onClick={() => onToggle(!toggled)}>
+    <button onClick={() => onToggle(!toggled)} aria-label={title}>
       {toggled ? onIcon : offIcon}
     </button>
   );
